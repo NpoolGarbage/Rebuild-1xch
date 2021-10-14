@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import backurl from '../../assets/img/login-title.png'
+import backurl from '../../assets/img/digital-title.png'
 import ChangeLang from '../components/ChangeLang.vue'
 
 export default {
@@ -69,10 +69,19 @@ export default {
 .main-background {
   width: 100%;
   height: 100%;
-  background-image: url("../../assets/img/login-bkg.png");
-  background-attachment: scroll;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
+  /* background-attachment: scroll;
+  background-repeat: no-repeat; */
+  /* background-size: 100% 100%; */
+  background: url("../../assets/img/bkg-img.jpg") center center no-repeat;
+}
+
+.main-background::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  filter:blur(5px);
 }
 
 .div-style {

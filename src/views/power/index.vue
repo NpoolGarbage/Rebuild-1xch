@@ -7,7 +7,7 @@
     <div>
       <div class="cards-display">
         <el-card class="card-style">
-          <div class="card-title-style">
+          <!-- <div class="card-title-style">
             <span class="profit-font">${{ totalGet }}</span>
             <span
               style="font-size: 14px; padding-top: 10px; color: grey;"
@@ -27,10 +27,40 @@
                 </div>
               </el-col>
             </el-row>
+          </div>-->
+          <div>
+            <div class="card-title" v-loading="imgLoading">
+              <el-image
+                :src="ficImg"
+                style="width: 60px; height: 60px; padding: 10px;"
+              ></el-image>
+              <span style="font-size: 24px">FIC</span>
+            </div>
+            <div class="card-body">
+              <span class="profit-font">${{ ficInfo.total }}</span>
+              <span
+                style="font-size: 14px; padding-top: 10px; color: grey;"
+              >{{ myTranslation.card.total }}</span>
+            </div>
           </div>
         </el-card>
         <el-card class="card-style">
-          <div class="card-title-style">
+          <div>
+            <div class="card-title" v-loading="imgLoading">
+              <el-image
+                :src="ficImg"
+                style="width: 60px; height: 60px; padding: 10px;"
+              ></el-image>
+              <span style="font-size: 24px">FIC</span>
+            </div>
+            <div class="card-body">
+              <span class="profit-font">${{ ficInfo.yesterday }}</span>
+              <span
+                style="font-size: 14px; padding-top: 10px; color: grey;"
+              >{{ myTranslation.card.yesterday }}</span>
+            </div>
+          </div>
+          <!-- <div class="card-title-style">
             <span class="profit-font">${{ yesterdayGet }}</span>
             <span
               style="font-size: 14px; padding-top: 10px; color: grey;"
@@ -50,10 +80,25 @@
                 </div>
               </el-col>
             </el-row>
-          </div>
+          </div>-->
         </el-card>
         <el-card class="card-style">
-          <div class="card-title-style">
+          <div>
+            <div class="card-title" v-loading="imgLoading">
+              <el-image
+                :src="ficImg"
+                style="width: 60px; height: 60px; padding: 10px;"
+              ></el-image>
+              <span style="font-size: 24px">FIC</span>
+            </div>
+            <div class="card-body">
+              <span class="profit-font">${{ ficInfo.available }}</span>
+              <span
+                style="font-size: 14px; padding-top: 10px; color: grey;"
+              >{{ myTranslation.card.available }}</span>
+            </div>
+          </div>
+          <!-- <div class="card-title-style">
             <span class="profit-font">${{ availableGet }}</span>
             <span
               style="font-size: 14px; padding-top: 10px; color: grey;"
@@ -73,7 +118,7 @@
                 </div>
               </el-col>
             </el-row>
-          </div>
+          </div>-->
         </el-card>
       </div>
 
@@ -104,21 +149,13 @@
                 class="router-link-style"
               >{{ myTranslation.tablle.end }}</router-link>
             </a>
-          </div> -->
-          <div  class="sec-card-title">
+          </div>-->
+          <div class="sec-card-title">
             <el-radio-group v-model="nowChoose">
-              <el-radio-button :label="myTranslation.tablle.myOrder" @click="pushTo('myorder')">
-
-              </el-radio-button>
-              <el-radio-button :label="myTranslation.tablle.progress" @click="pushTo('progress')">
-
-              </el-radio-button>
-              <el-radio-button :label="myTranslation.tablle.wait" @click="pushTo('wait')">
-
-              </el-radio-button>
-              <el-radio-button :label="myTranslation.tablle.end" @click="pushTo('end')">
-
-              </el-radio-button>
+              <el-radio-button :label="myTranslation.tablle.myOrder" @click="pushTo('myorder')"></el-radio-button>
+              <el-radio-button :label="myTranslation.tablle.progress" @click="pushTo('progress')"></el-radio-button>
+              <el-radio-button :label="myTranslation.tablle.wait" @click="pushTo('wait')"></el-radio-button>
+              <el-radio-button :label="myTranslation.tablle.end" @click="pushTo('end')"></el-radio-button>
             </el-radio-group>
           </div>
           <div style="margin-top: 20px;">
@@ -136,6 +173,7 @@ export default {
   data: function () {
     return {
       nowChoose: '',
+      imgLoading: true,
       orderList: [
         {
           amount_profit_total: "0.0000",
@@ -193,28 +231,35 @@ export default {
       totalGet: 0,
       yesterdayGet: 0,
       availableGet: 0,
+      ficInfo: {
+        symbol: '',
+        total: 0,
+        img: '',
+        yesterday: 0,
+        available: 0,
+      },
       allCoinInfo: {
-        FIL: {
-          symbol: '',
-          total: 0,
-          img: '',
-          yesterday: 0,
-          available: 0,
-        },
-        CHIA: {
-          symbol: '',
-          total: 0,
-          img: '',
-          yesterday: 0,
-          available: 0,
-        },
-        USDT: {
-          symbol: '',
-          total: 0,
-          img: '',
-          yesterday: 0,
-          available: 0,
-        },
+        // FIL: {
+        //   symbol: '',
+        //   total: 0,
+        //   img: '',
+        //   yesterday: 0,
+        //   available: 0,
+        // },
+        // CHIA: {
+        //   symbol: '',
+        //   total: 0,
+        //   img: '',
+        //   yesterday: 0,
+        //   available: 0,
+        // },
+        // USDT: {
+        //   symbol: '',
+        //   total: 0,
+        //   img: '',
+        //   yesterday: 0,
+        //   available: 0,
+        // },
         FIC: {
           symbol: '',
           total: 0,
@@ -222,6 +267,7 @@ export default {
           yesterday: 0,
           available: 0,
         },
+        ficImg: '',
       },
     }
   },
@@ -259,16 +305,22 @@ export default {
       handler: function (n, o) { },
     },
 
-    allCoinInfo: {
+    ficInfo: {
       deep: true,
       immediate: true,
-      handler: function (n, o) { },
+      handler: function (n, o) {
+      },
     },
 
     userCoinList: {
       deep: true,
       immediate: true,
-      handler: function (n, o) { },
+      handler: function (n, o) {
+        if (n !== null) {
+          this.ficImg = 'http://api.1xch.one/cache/image/' + n.icon_url
+          this.imgLoading = false;
+        }
+      },
     },
   },
 
@@ -279,21 +331,21 @@ export default {
   },
 
   methods: {
-    pushTo: function(to) {
+    pushTo: function (to) {
       switch (to) {
         case 'myorder':
           this.$router.push('/main/power/myorder');
           break;
-          case 'progress':
+        case 'progress':
           this.$router.push('/main/power/progressing');
           break;
-          case 'wait':
+        case 'wait':
           this.$router.push('/main/power/wait');
           break;
-          case 'end':
+        case 'end':
           this.$router.push('/main/power/end');
           break;
-      
+
         default:
           break;
       }
@@ -314,7 +366,12 @@ export default {
           });
           return;
         }
-        self.userCoinList = resp.list;
+        resp.list.forEach(coin => {
+          if (coin.symbol === 'FIC') {
+            self.userCoinList = coin;
+          }
+        });
+        // self.userCoinList = resp.list;
       }).catch(error => {
         self.$notify.error({
           title: error,
@@ -370,59 +427,67 @@ export default {
       for (let i = 1; i <= this.pageTotal; i++) {
         let orderList = this.getOrderList(i);
         orderList.forEach(order => {
-          self.totalGet += Number(order.profit_total);
-          self.yesterdayGet += Number(order.profit_last);
-          self.availableGet += Number(order.amount_profit_total);
-          totalOrderList.push(order);
-          switch (order.symbol) {
-            case 'CHIA':
-              self.allCoinInfo.CHIA.symbol = order.symbol;
-              self.allCoinInfo.CHIA.total += Number(order.profit_total);
-              self.allCoinInfo.CHIA.img = order.icon_url;
-              self.allCoinInfo.CHIA.yesterday += Number(order.profit_last);
-              self.allCoinInfo.CHIA.available += Number(order.amount_profit_total);
-              break;
-            case 'USDT':
-              self.allCoinInfo.USDT.symbol = order.symbol;
-              self.allCoinInfo.USDT.total += Number(order.profit_total);
-              self.allCoinInfo.USDT.img = order.icon_url;
-              self.allCoinInfo.USDT.yesterday += Number(order.profit_last);
-              self.allCoinInfo.USDT.available += Number(order.amount_profit_total);
-              break;
-            case 'FIL':
-              self.allCoinInfo.FIL.symbol = order.symbol;
-              self.allCoinInfo.FIL.total += Number(order.profit_total);
-              self.allCoinInfo.FIL.img = order.icon_url;
-              self.allCoinInfo.FIL.yesterday += Number(order.profit_last);
-              self.allCoinInfo.FIL.available += Number(order.amount_profit_total);
-              break;
-            case 'FIC':
-              self.allCoinInfo.FIC.symbol = order.symbol;
-              self.allCoinInfo.FIC.total += Number(order.profit_total);
-              self.allCoinInfo.FIC.img = order.icon_url;
-              self.allCoinInfo.FIC.yesterday += Number(order.profit_last);
-              self.allCoinInfo.FIC.available += Number(order.amount_profit_total);
-              break;
+          // self.totalGet += Number(order.profit_total);
+          // self.yesterdayGet += Number(order.profit_last);
+          // self.availableGet += Number(order.amount_profit_total);
+          if (order.symbol === 'FIC') {
+            totalOrderList.push(order);
+            self.ficInfo.symbol = order.symbol;
+            self.ficInfo.total += Number(order.profit_total);
+            self.ficInfo.img = order.icon_url;
+            self.ficInfo.yesterday += Number(order.profit_last);
+            self.ficInfo.available += Number(order.amount_profit_total);
 
-            default:
-              break;
-          }
+            // switch (order.symbol) {
+            //   case 'CHIA':
+            //     self.allCoinInfo.CHIA.symbol = order.symbol;
+            //     self.allCoinInfo.CHIA.total += Number(order.profit_total);
+            //     self.allCoinInfo.CHIA.img = order.icon_url;
+            //     self.allCoinInfo.CHIA.yesterday += Number(order.profit_last);
+            //     self.allCoinInfo.CHIA.available += Number(order.amount_profit_total);
+            //     break;
+            //   case 'USDT':
+            //     self.allCoinInfo.USDT.symbol = order.symbol;
+            //     self.allCoinInfo.USDT.total += Number(order.profit_total);
+            //     self.allCoinInfo.USDT.img = order.icon_url;
+            //     self.allCoinInfo.USDT.yesterday += Number(order.profit_last);
+            //     self.allCoinInfo.USDT.available += Number(order.amount_profit_total);
+            //     break;
+            //   case 'FIL':
+            //     self.allCoinInfo.FIL.symbol = order.symbol;
+            //     self.allCoinInfo.FIL.total += Number(order.profit_total);
+            //     self.allCoinInfo.FIL.img = order.icon_url;
+            //     self.allCoinInfo.FIL.yesterday += Number(order.profit_last);
+            //     self.allCoinInfo.FIL.available += Number(order.amount_profit_total);
+            //     break;
+            //   case 'FIC':
+            //     self.allCoinInfo.FIC.symbol = order.symbol;
+            //     self.allCoinInfo.FIC.total += Number(order.profit_total);
+            //     self.allCoinInfo.FIC.img = order.icon_url;
+            //     self.allCoinInfo.FIC.yesterday += Number(order.profit_last);
+            //     self.allCoinInfo.FIC.available += Number(order.amount_profit_total);
+            //     break;
 
-          switch (order.status) {
-            case '0':
-              waitOrderList.push(order);
-              break;
-            case '1':
-              progressingOrderList.push(order);
-              break;
-            case '2':
-              endOrderList.push(order);
-              break;
-            case '3':
-              endOrderList.push(order);
-              break;
-            default:
-              break;
+            //   default:
+            //     break;
+            // }
+
+            switch (order.status) {
+              case '0':
+                waitOrderList.push(order);
+                break;
+              case '1':
+                progressingOrderList.push(order);
+                break;
+              case '2':
+                endOrderList.push(order);
+                break;
+              case '3':
+                endOrderList.push(order);
+                break;
+              default:
+                break;
+            }
           }
         });
       }
@@ -471,7 +536,7 @@ export default {
 
 .card-style {
   width: 350px;
-  height: 220px;
+  height: 200px;
   margin: 0 10px;
 }
 
@@ -481,7 +546,12 @@ export default {
   font-weight: bold;
 }
 
-.card-title-style {
+.card-title {
+  display: flex;
+  align-items: center;
+}
+
+.card-body {
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -9,7 +9,7 @@
         <el-button style="width: 160px" @click="goToBasicDetail">{{ myTranslation.accountDetail }}</el-button>
       </div>
       <div v-for="coin in userCoinList" :key="coin.cid" style="padding: 20px; width: 100%;">
-        <el-card class="coin-card-style">
+        <el-card class="coin-card-style" v-if="coin.symbol === 'FIC' || coin.symbol === 'USDT'">
           <div class="card-body">
             <div class="card-left">
               <el-image

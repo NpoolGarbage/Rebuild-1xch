@@ -2,7 +2,7 @@
   <div class="main" v-loading="loading">
     <div class="main-header">
       <div class="header-left">
-        <el-image :src="logo"></el-image>
+        <el-image :src="logo" @click="goToPower"></el-image>
       </div>
       <div class="header-right">
         <div style="margin: 10px;">
@@ -193,6 +193,10 @@ export default {
   },
 
   methods: {
+    goToPower: function() {
+      this.$router.push('/main/power/myorder');
+    },
+
     changePassWord: function(){
       let self = this;
       if (this.changePassInput.password === this.changePassInput.oldPassword) {

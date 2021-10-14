@@ -90,7 +90,7 @@ export default {
         self.tokenid = resp.tokenid;
         self.getUserInfo();
         self.$cookies.set('tokenid', resp.tokenid);
-        self.$router.push({ path: '/main/treasure' });
+        self.$router.push({ path: '/main/power/myorder' });
       }).catch(error => {
         ElNotification.error({
           title: error,
