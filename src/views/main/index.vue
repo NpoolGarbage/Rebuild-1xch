@@ -87,7 +87,7 @@
         </div>
 
         <div class="footer-text-style">
-          <span class="footer-text">{{ myTranslation.footer.contact }} XXXX@XXX.com</span>
+          <span class="footer-text">{{ myTranslation.footer.contact }} Support@digitaloffers.io</span>
           <span class="footer-text">Copyright Digital Offers All Rights Reserved</span>
         </div>
       </div>

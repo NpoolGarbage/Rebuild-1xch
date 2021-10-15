@@ -1,1 +1,0 @@
-import{_ as e}from"./index.be6e309c.js";import{o,c as r}from"./vendor.ae7442e4.js";const n={};function s(a,c,t,p,_,d){return o(),r("div",null,"change pass")}var l=e(n,[["render",s]]);export{l as default};
