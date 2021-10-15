@@ -1,0 +1,1 @@
+import{_ as e}from"./index.dda3569b.js";import{o,c as r}from"./vendor.ae7442e4.js";const a={};function n(s,t,c,d,p,_){return o(),r("div",null,"change pass")}var l=e(a,[["render",n]]);export{l as default};

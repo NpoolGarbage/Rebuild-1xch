@@ -47,21 +47,33 @@
 
           <el-dialog :title="myTranslation.userDropdown.changepass" v-model="changepassDialog">
             <div class="dialog-input">
-              <span style="font-size: 16px">{{dialogTrans.oldPass}}</span>
-              <el-input v-model="changePassInput.oldPassword" :placeholder="dialogTrans.oldPassInput" show-password></el-input>
+              <span style="font-size: 16px">{{ dialogTrans.oldPass }}</span>
+              <el-input
+                v-model="changePassInput.oldPassword"
+                :placeholder="dialogTrans.oldPassInput"
+                show-password
+              ></el-input>
             </div>
             <div class="dialog-input">
-              <span style="font-size: 16px">{{dialogTrans.newPass}}</span>
-              <el-input v-model="changePassInput.password" :placeholder="dialogTrans.newPassInput" show-password></el-input>
+              <span style="font-size: 16px">{{ dialogTrans.newPass }}</span>
+              <el-input
+                v-model="changePassInput.password"
+                :placeholder="dialogTrans.newPassInput"
+                show-password
+              ></el-input>
             </div>
             <div class="dialog-input">
-              <span style="font-size: 16px">{{dialogTrans.confirmPass}}</span>
-              <el-input v-model="changePassInput.confirmPassword" :placeholder="dialogTrans.confirmPassInput" show-password></el-input>
+              <span style="font-size: 16px">{{ dialogTrans.confirmPass }}</span>
+              <el-input
+                v-model="changePassInput.confirmPassword"
+                :placeholder="dialogTrans.confirmPassInput"
+                show-password
+              ></el-input>
             </div>
             <template #footer>
               <span class="dialog-footer">
-                <el-button @click="changepassDialog = false">{{dialogTrans.cancelBtn}}</el-button>
-                <el-button type="primary" @click="changePassWord">{{dialogTrans.confirmBtn}}</el-button>
+                <el-button @click="changepassDialog = false">{{ dialogTrans.cancelBtn }}</el-button>
+                <el-button type="primary" @click="changePassWord">{{ dialogTrans.confirmBtn }}</el-button>
               </span>
             </template>
           </el-dialog>
@@ -70,7 +82,7 @@
         <div style="color: white; margin-right: 10px;">
           <!-- <el-select v-model="lang" style="width: 120px" @change="selectLang">
             <el-option v-for="la in langs" :key="la.value" :label="la.label" :value="la.value"></el-option>
-          </el-select> -->
+          </el-select>-->
           <change-lang :myLang="lang"></change-lang>
         </div>
       </div>
@@ -87,7 +99,8 @@
         </div>
 
         <div class="footer-text-style">
-          <span class="footer-text">{{ myTranslation.footer.contact }} Support@digitaloffers.io</span>
+          
+          <span class="footer-text">{{ myTranslation.footer.contact }} <span style="font-weight: bolder;">Support@digitaloffers.io</span></span>
           <span class="footer-text">Copyright Digital Offers All Rights Reserved</span>
         </div>
       </div>
@@ -130,6 +143,7 @@ import axios from 'axios';
 import logoUrl from '../../assets/img/login-title.png'
 import { getAxios } from '../../assets/getaxios';
 import ChangeLang from '../components/ChangeLang.vue';
+// import {message} from 'element-plus/'
 
 export default {
   components: { ChangeLang },
@@ -193,11 +207,11 @@ export default {
   },
 
   methods: {
-    goToPower: function() {
+    goToPower: function () {
       this.$router.push('/main/power/myorder');
     },
 
-    changePassWord: function(){
+    changePassWord: function () {
       let self = this;
       if (this.changePassInput.password === this.changePassInput.oldPassword) {
         this.$notify.error({
@@ -214,7 +228,7 @@ export default {
         });
         return;
       }
-      
+
       let params = new FormData();
       params.append('lang', this.lang);
       params.append('tokenid', this.tokenid);
@@ -238,10 +252,10 @@ export default {
         self.loading = true;
         setTimeout(() => {
           self.$cookies.remove('tokenid');
-        },1000);
+        }, 1000);
         self.loading = false;
         self.$router.push('/login');
-      }).catch(error=>{
+      }).catch(error => {
         self.$notify.error({
           title: 'Error',
           message: error,
